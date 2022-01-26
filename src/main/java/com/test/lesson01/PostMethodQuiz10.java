@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+//이슈 테스트를 위한 주석 추가
 @WebServlet("/servlet/quiz10")
 
 public class PostMethodQuiz10 extends HttpServlet{
