@@ -20,11 +20,10 @@
 		});
 	
 	
-	
 	%>
 	<div class="container">
-		<h1>장보기 목록</h1>
-		<table>
+		<h1 class="text-center">장보기 목록</h1>
+		<table class="table text-center">
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -32,11 +31,17 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%<tr>
-					<th>
-					</th>
-					<td></td>
-				</tr>%>
+			<% 
+				for (int i = 0; i < goodsList.size() ; i++ ){
+					
+			%>
+				<tr>
+					<td><%= i + 1 %></td>
+					<td><%= goodsList.get(i) %></td>
+				</tr>
+			<%
+				}
+			%>
 			</tbody>
 			
 		</table>
