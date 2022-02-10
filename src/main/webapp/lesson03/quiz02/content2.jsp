@@ -76,35 +76,63 @@ musicInfo.put("lyricist", "아이유");
 musicList.add(musicInfo);
 %>
 
-<section class="content2">
-	<h3>곡 목록</h3>
-	<table class="table text-center">
-		<thead>
-			<tr>
-				<th>no</th>
-				<th>제목</th>
-				<th>앨범</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-			String title = request.getParameter("search");
+<%
+//상세 정보를 보여줄 target map 세팅
+Map<String, Object> target = null;
 
-			for (Map<String, Object> item : musicList) {
-			%>
+// 1. 목록에서 클릭한 경우
+if(request.getParameter("id") != null){
+	int id = Integer.parseInt(request.getParameter("id"));
 
-			<tr>
-				<td><%=item.get("id")%></td>
-				<td><%=item.get("title")%></td>
-				<td><%=item.get("album")%></td>
-			</tr>
-			<%
+	for (Map<String, Object> music : musicList) {
+		if (id == (int) music.get("id")) {
+			target = music;
+			break;
+		}
+	}
+}
+
+// 2. 상단에서 검색한 경우(search값)
+	if(request.getParameter("search") != null){
+		String search = request.getParameter("search");
+	/* 	out.print("###### search: "+ search); */
+		
+		for(Map<String, Object>music : musicList){
+			if(search.equals(music.get("title"))){
+				target=music;
+				break;
 			}
-			%>
-		</tbody>
-	</table>
-<!-- 가사 영역 -->
-	<div>
+		}
+	}
+%>
+<section class="content2">
+	<!-- 곡 정보 영역 -->
+	<h3 class="mt-4">곡 정보</h3>
+	<div class="artist-info my-4 d-flex p-3">
+		<div class="music-photo">
+			<img src="<%= target.get("thumbnail")%>" alt="앨범 이미지" width="150">
+		</div>
+		<div class="music-detail ml-2">
+			<div class="text-success font-weight-bold"><%=target.get("singer") %></div>
+			<div class="text-secondary d-flex mt-3">
+				<div>
+					앨범<br> 
+					재생시간<br> 
+					작곡가<br> 
+					작사가
+				</div>
+				<div class="ml-4">
+					<%=target.get("album") %><br> 
+					<%=(int)target.get("time") / 60%> : <%=(int)target.get("time") % 60 %><br> 
+					<%=target.get("composer") %><br> 
+					<%=target.get("lyricist") %>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- 가사 영역 -->
+	<div class="mt-4">
 		<h3>가사</h3>
 		<hr>
 		가사 정보 없음

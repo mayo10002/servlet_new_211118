@@ -29,7 +29,7 @@
 	<div id="wrap">
 		<jsp:include page="header.jsp" />
 		<jsp:include page="menu.jsp" />
-		<jsp:include page="content1.jsp" />
+		<jsp:include page="content2.jsp" />
 		<jsp:include page="footer.jsp" />
 		
 		

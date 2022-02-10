@@ -80,22 +80,19 @@ musicInfo.put("composer", "아이유,이종훈,이채규");
 musicInfo.put("lyricist", "아이유");
 musicList.add(musicInfo);
 %>
-<!-- 아티스트 정보 영역 -->
 <section class="ml-4">
+<!-- 아티스트 정보 영역 -->
 	<div class="artist-info my-4 d-flex p-3">
 		<div class="singer-photo">
 			<img src="<%=artistInfo.get("photo")%>" alt="가수 이미지" width="150">
 		</div>
-		<div class="singer-info">
-			<h3 class="font-weight-bold">아이유</h3>
-			<div>소속사</div>
-			<div>데뷔 일자</div>
+		<div class="singer-info ml-2">
+			<h3 class="font-weight-bold"><%= artistInfo.get("name") %></h3>
+			<div><%= artistInfo.get("agency") %></div>
+			<div><%= artistInfo.get("debute") %> 데뷔</div>
 		</div>
-		<%
-
-		%>
 	</div>
-
+<!-- 곡 목록 영역 -->
 	<div>
 		<section class="content2">
 			<h3>곡 목록</h3>
@@ -116,7 +113,7 @@ musicList.add(musicInfo);
 
 					<tr>
 						<td><%=item.get("id")%></td>
-						<td><a href="#"><%=item.get("title")%></a></td>
+						<td><a href="/lesson03/quiz02/info_template.jsp?id=<%= item.get("id")%>"><%=item.get("title")%></a></td>
 						<td><%=item.get("album")%></td>
 					</tr>
 					<%
@@ -124,12 +121,6 @@ musicList.add(musicInfo);
 					%>
 				</tbody>
 			</table>
-
-			<div>
-				<h3>가사</h3>
-				<hr>
-				가사 정보 없음
-			</div>
 
 		</section>
 	</div>

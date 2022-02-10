@@ -8,10 +8,13 @@
 
 	<!-- 검색 영역 -->
 	<div class="searchbox d-flex col-9">
-		<input type="text" class="form-control col-5" name="search">
-		<div class="input-group-append">
-			<button type="submit" class="btn btn-success">검색</button>
+		<form method="get" action="/lesson03/quiz02/info_template.jsp">
+		<div class="input-group">
+			<input type="text" class="form-control col-6" name="search">
+			<div class="input-group-append">
+				<input type="submit" class="btn btn-success" value="검색">
+			</div>
 		</div>
-
+		</form>
 	</div>
 </header>
