@@ -34,18 +34,21 @@ public class Lesson04Quiz01 extends HttpServlet{
 				
 				// select query 
 				String selectQuery = "select * from `real_estate`"
-						+ "order by `id` desc;";
+						+ "order by `id` desc limit 10;";
 				// 결과 출력
 				try {
 					PrintWriter out = response.getWriter();
 					ResultSet resultSet = mysql.select(selectQuery);
 					
 					while(resultSet.next()) { // 결과 행이 있는 동안 수행
-						out.println(resultSet.getInt("id"));
-						out.println(resultSet.getInt("id"));
-						out.println(resultSet.getString("title"));
-						out.println(resultSet.getString("description"));
-						out.println(resultSet.getInt("price"));
+//						out.println(resultSet.getInt("realtorId"));
+//						out.println(resultSet.getString("address"));
+//						out.println(resultSet.getInt("area"));
+//						out.println(resultSet.getString("type"));
+//						out.println(resultSet.getInt("price"));
+//						out.println(resultSet.getInt("rentPrice"));
+						out.println("매물 주소: " + resultSet.getString("address") + ", 면적: " + resultSet.getInt("area") 
+						+ ", 타입: " + resultSet.getString("type"));
 					}
 					
 				} catch (SQLException e) {
