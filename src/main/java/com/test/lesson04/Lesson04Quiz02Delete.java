@@ -1,5 +1,6 @@
 package com.test.lesson04;
 
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -10,33 +11,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.test.common.MysqlService;
 
-@WebServlet("/lesson04/quiz02_insert")
-public class Lesson04Quiz02 extends HttpServlet {
+@WebServlet("/lesson04/quiz02_delete")
+public class Lesson04Quiz02Delete extends HttpServlet {
+	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.setContentType("text/plain");
-
-		String name = request.getParameter("name");
-		String url = request.getParameter("url");
-
-		// DB 접속 연결
+		// request parameter => id
+		int id = Integer.parseInt(request.getParameter("id"));
+		// DB 연결
 		MysqlService mysqlService = MysqlService.getInstance();
-		mysqlService.connection(); // DB 연결
-
-		// 쿼리 수행
-		String insertQuery = "insert into `webpage` (`name`,`url`)" + "values('" + name + "','" + url + "');";
-
+		mysqlService.connection();
+		// delete query 수행
+		String deleteQuery = "delete from `webpage` where `id` =" + id;
 		try {
-			mysqlService.update(insertQuery);
+			mysqlService.update(deleteQuery);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// DB 접속 연결 해제
+		
+		// DB 연결 해제 
 		mysqlService.disconnection();
-
-		// 목록 화면 이동
+		// 목록 확인 이동 > 리다이렉트
 		response.sendRedirect("/lesson04/quiz02_1.jsp");
+		}
 	}
-}

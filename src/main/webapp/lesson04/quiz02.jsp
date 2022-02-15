@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.test.common.MysqlService" %>
+<%@ page import="java.sql.ResultSet" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>즐겨찾기</title>
+<title>즐겨찾기 추가</title>
 <!-- bootstrap CDN link -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -13,21 +15,34 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
+<%
+MysqlService mysql = MysqlService.getInstance();
+mysql.connection();
+
+String selectQuery = "select * from `new_user` order by `id` desc";
+ResultSet result = mysql.select(selectQuery);
+
+%>
 	<div class="container">
 		<h1 class="my-2">즐겨찾기 추가</h1>
 		
 		<form method="post" action="/lesson04/quiz02_insert">
-			<div>
+			<div class="form-group">
 				<div><strong>사이트명</strong></div>
-				<input type="text" name="name">
+				<input type="text" class="form-control" name="name">
 			</div>
-			<div>
+			<div class="form-group">
 				<div><strong>사이트 주소</strong></div>
-				<input type="text" name="url">
-			</div>
+				<input type="text" class="form-control" name="url">
+			</div class="form-group">
 			<input type="submit" class="btn btn-success" value="추가">
 		</form>
 	</div>
 	
+	
+	<% 
+		//DB 연결 해제
+		mysql.disconnection();
+	%>
 </body>
 </html>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="com.test.common.MysqlService" %>
+<%@ page import="java.sql.ResultSet" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,23 +15,42 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
+<%
+MysqlService mysql = MysqlService.getInstance();
+mysql.connection();
+
+String selectQuery = "select * from `webpage` order by `id` desc";
+ResultSet result = mysql.select(selectQuery);
+
+%>
 	<div>
 		<table class="table text-center">
 			<thead>
 				<tr>
 					<th>사이트</th>
 					<th>사이트 주소</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
-			<% %>
+				<% 
+				while(result.next()){
+				%>
 				<tr>
-					<td></td>
-					<td></td>
+					<td><%= result.getString("name") %></td>
+					<td><a href="<%= result.getString("url") %>"><%= result.getString("url") %></a></td>
+					<td><a href="/lesson04/quiz02_delete?id=<%= result.getInt("id") %>" class="btn btn-danger" >삭제하기</a></td>
 				</tr>
-				<% %>
+				<% 
+				}
+				%>
 			</tbody>
 		</table>
 	</div>
+	
+	<% 
+		//DB 연결 해제
+		mysql.disconnection();
+	%>
 </body>
 </html>
